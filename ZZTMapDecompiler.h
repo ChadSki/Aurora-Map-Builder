@@ -27,10 +27,10 @@ SOFTWARE.
 extern "C" {
 #endif
 
-#include "ZZTMapFormat.h"
-
 #ifndef Aurora_ZZTMapDecompiler_h
 #define Aurora_ZZTMapDecompiler_h
+    
+#include "ZZTAuroraTag.h"
 
 AuroraTagArray decompileMapFromBuffer(const void *map);
 

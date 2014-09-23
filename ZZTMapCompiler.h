@@ -27,10 +27,10 @@ SOFTWARE.
 extern "C" {
 #endif
 
-#include "ZZTMapFormat.h"
-
 #ifndef Aurora_ZZTMapCompiler_h
 #define Aurora_ZZTMapCompiler_h
+    
+#include "ZZTAuroraTag.h"
 
 typedef enum MapType {
     MAP_TYPE_SINGLE_PLAYER = 0,
