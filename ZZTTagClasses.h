@@ -17,6 +17,11 @@
  
  */
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 
 #define ACTR "rtca"
@@ -106,4 +111,8 @@
 #ifndef deathstar_ZZTTagClasses_h
 #define deathstar_ZZTTagClasses_h
 const char *translateHaloClassToName(uint32_t className);
+#endif
+    
+#ifdef __cplusplus
+}
 #endif

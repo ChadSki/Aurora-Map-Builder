@@ -23,6 +23,9 @@ SOFTWARE.
 */
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "ZZTMap.h"
 #include "ZZTTagClasses.h"
@@ -189,4 +192,9 @@ typedef struct mod2_geo_part {
     char padding2[0x1C];
 } mod2_geo_part;
 
+#endif
+    
+    
+#ifdef __cplusplus
+}
 #endif

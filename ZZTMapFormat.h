@@ -23,6 +23,9 @@ SOFTWARE.
 */
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifndef Aurora_ZZTMapFormat_h
 #define Aurora_ZZTMapFormat_h
@@ -63,4 +66,9 @@ typedef struct AuroraTagArray {
     uint32_t tagCount;
 } AuroraTagArray;
 
+#endif
+    
+    
+#ifdef __cplusplus
+}
 #endif

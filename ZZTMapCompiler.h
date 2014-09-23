@@ -23,6 +23,9 @@ SOFTWARE.
 */
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "ZZTMapFormat.h"
 
@@ -42,4 +45,9 @@ typedef enum GameVersion {
 
 void *compileMapFromTagArray(const AuroraTagArray tagArray, uint32_t primaryScenarioTagIndex, uint16_t mapType, uint32_t gameVersion, const char *mapName);
 
+#endif
+
+    
+#ifdef __cplusplus
+}
 #endif

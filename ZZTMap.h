@@ -26,6 +26,10 @@ SOFTWARE.
 
 // General map structure header file.
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef Aurora_ZZTMap_h
 #define Aurora_ZZTMap_h
 
@@ -98,4 +102,8 @@ typedef struct PredictedResource {
 
 
 
+#endif
+    
+#ifdef __cplusplus
+}
 #endif

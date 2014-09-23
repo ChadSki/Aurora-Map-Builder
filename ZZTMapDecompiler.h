@@ -23,6 +23,9 @@ SOFTWARE.
 */
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "ZZTMapFormat.h"
 
@@ -31,4 +34,9 @@ SOFTWARE.
 
 AuroraTagArray decompileMapFromBuffer(const void *map);
 
+#endif
+
+    
+#ifdef __cplusplus
+}
 #endif
