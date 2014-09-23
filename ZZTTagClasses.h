@@ -22,8 +22,11 @@
 extern "C" {
 #endif
 
+#ifndef deathstar_ZZTTagClasses_h
+#define deathstar_ZZTTagClasses_h
+    
 #include <stdint.h>
-
+    
 #define ACTR "rtca"
 #define ACTV "vtca"
 #define ANT "!tna"
@@ -107,9 +110,6 @@ extern "C" {
 #define WEAP "paew"
 #define WIND "dniw"
 #define WPHI "ihpw"
-
-#ifndef deathstar_ZZTTagClasses_h
-#define deathstar_ZZTTagClasses_h
 const char *translateHaloClassToName(uint32_t className);
 #endif
     

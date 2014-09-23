@@ -29,6 +29,8 @@ extern "C" {
 
 #ifndef Aurora_ZZTMapFormat_h
 #define Aurora_ZZTMapFormat_h
+    
+#include <stdint.h>
 
 typedef enum AuroraTagReferenceType {
     AURORA_TAG_REFERENCE_TAGID,

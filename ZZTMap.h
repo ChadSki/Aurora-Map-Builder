@@ -32,6 +32,8 @@ extern "C" {
 
 #ifndef Aurora_ZZTMap_h
 #define Aurora_ZZTMap_h
+    
+#include <stdint.h>
 
 #define HALO_META_MEMORY_OFFSET 0x40440000
 #define TAG_INDEX_ZERO (uint16_t)0xE174
