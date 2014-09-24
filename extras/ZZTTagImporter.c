@@ -23,7 +23,7 @@
  */
 
 #include "ZZTTagImporter.h"
-#include "ZZTMap.h"
+#include "../ZZTMap.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
