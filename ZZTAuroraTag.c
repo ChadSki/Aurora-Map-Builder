@@ -32,7 +32,7 @@ AuroraTag cloneTag(const AuroraTag tag) {
     memcpy(&newTag, &tag, sizeof(AuroraTag));
     
     newTag.path = calloc(sizeof(char), strlen(tag.path) + 1);
-    memcpy(newTag.path,tag.path,strlen(tag.path));
+    strcpy(newTag.path,tag.path);
     
     if(newTag.rawData) {
         newTag.rawData = malloc(tag.rawDataSize);

@@ -63,17 +63,17 @@ void importTagsIntoTagArray(AuroraTagArray *tagArray, const AuroraTagArray tagsT
             tagsToAdd.tags = malloc(sizeof(AuroraTag) * tagsToImport.tagCount);
             tagsToAdd.tagCount = 0;
             for(uint32_t i=0;i<tagsToImport.tagCount;i++) {
-                uint32_t tagFound = searchForTagInTagArray(tagArray, tagsToAdd.tags[i]);
+                uint32_t tagFound = searchForTagInTagArray(tagArray, tagsToImport.tags[i]);
                 if(tagFound == TAG_NOT_FOUND) {
                     tagsToAdd.tags[tagsToAdd.tagCount] = tagsToImportCopy.tags[i];
                     for(uint32_t j=0;j<tagsToImport.tagCount;j++) {
-                        for(uint32_t k=0;k<tagsToImport.tags[i].referenceCount;k++) {
-                            if(tagsToImport.tags[i].references[k].tagIndex == i) {
-                                tagsToImportCopy.tags[i].references[k].tagIndex = tagArray->tagCount + tagsToImportCopy.tagCount;
+                        for(uint32_t k=0;k<tagsToImport.tags[j].referenceCount;k++) {
+                            if(tagsToImport.tags[j].references[k].tagIndex == i) {
+                                tagsToImportCopy.tags[j].references[k].tagIndex = tagArray->tagCount + tagsToAdd.tagCount;
                             }
                         }
                     }
-                    tagsToImportCopy.tagCount ++;
+                    tagsToAdd.tagCount ++;
                 }
                 else {
                     for(uint32_t j=0;j<tagsToImport.tagCount;j++) {
@@ -100,11 +100,9 @@ void importTagsIntoTagArray(AuroraTagArray *tagArray, const AuroraTagArray tagsT
         tagsToAdd.tagCount = 1;
         tagsToAdd.tags = malloc(sizeof(AuroraTag));
         tagsToAdd.tags[0] = cloneTag(tagsToImport.tags[mainTag]);
-        uint32_t referencesCount = 0;
         for(uint32_t i=0;i<tagsToAdd.tags->referenceCount;i++) {
             AuroraTag tagCheck = tagsToImport.tags[tagsToAdd.tags->references[i].tagIndex];
             tagsToAdd.tags->references[i].tagIndex = searchForTagInTagArray(tagArray, tagCheck);
-            referencesCount ++;
         }
         if(isADuplicate) {
             char *path = calloc(strlen(tagsToAdd.tags->path) + 8,sizeof(char));
@@ -112,17 +110,17 @@ void importTagsIntoTagArray(AuroraTagArray *tagArray, const AuroraTagArray tagsT
             free(tagsToAdd.tags->path);
             tagsToAdd.tags->path = path;
         }
-        AuroraTagReference *references = malloc(referencesCount * sizeof(AuroraTagReference));
+        AuroraTagReference *references = malloc(tagsToAdd.tags->referenceCount * sizeof(AuroraTagReference));
         uint32_t currentReference = 0;
         for(uint32_t i=0;i<tagsToAdd.tags->referenceCount;i++) {
             if(tagsToAdd.tags->references[i].tagIndex == TAG_NOT_FOUND) {
-                void *dataPointer = tagsToAdd.tags->tagData +tagsToAdd.tags->references[i].offset;
+                void *dataPointer = tagsToAdd.tags->tagData + tagsToAdd.tags->references[i].offset;
                 if(tagsToAdd.tags->references[i].type == AURORA_TAG_REFERENCE_DEPENDENCY) {
                     Dependency *dependency = dataPointer;
                     dependency->tagId.tableIndex = 0xFFFF;
                     dependency->tagId.tagTableIndex = 0xFFFF;
                 }
-                else if(tagsToAdd.tags->references[i].type == AURORA_TAG_REFERENCE_DEPENDENCY) {
+                else if(tagsToAdd.tags->references[i].type == AURORA_TAG_REFERENCE_TAGID) {
                     TagID *tagId = dataPointer;
                     tagId->tableIndex = 0xFFFF;
                     tagId->tagTableIndex = 0xFFFF;
@@ -135,7 +133,7 @@ void importTagsIntoTagArray(AuroraTagArray *tagArray, const AuroraTagArray tagsT
         }
         free(tagsToAdd.tags->references);
         tagsToAdd.tags->references = references;
-        tagsToAdd.tags->referenceCount = referencesCount;
+        tagsToAdd.tags->referenceCount = currentReference;
     }
     uint32_t tagCount = tagArray->tagCount + tagsToAdd.tagCount;
     AuroraTag *tags = malloc(sizeof(AuroraTag) * tagCount);
